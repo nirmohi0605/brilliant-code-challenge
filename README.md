@@ -5,7 +5,7 @@
 
 ```bash
 => npm install
-=> sudo npm link # use sudo or give permissions for the executable file to run and to be called anywhere using the keyword 'league'
+=> sudo npm link # use sudo or give permissions for the executable file to run and to be called anywhere using the keyword 'stock'
 ```
 
 3. This CLI app supports input provided in the following ways:
@@ -13,24 +13,24 @@
 a) via stdin (pipe or redirect) if no input argument is provided:
 
 ```bash
-=> echo "Santa Cruz Slugs 0, Capitol Seahorses 0" | league  #pipe
-=> league < ./inputs/sample-input.txt # redirect
+=> echo "order kate hats 20" | stock  #pipe
+=> stock < ./inputs/sample-input.txt # redirect
 ```
 
 b) as file path if the first argument is provided
 
 ```bash
-  => league ./inputs/sample-input.txt
+  => stock ./inputs/sample-input.txt
 ```
 
 c) If a user tries to run the app without any input, the program prompts correct usage by printing it to the console.
 
 ```bash
-=> league  # no input provided by the user
+=> stock  # no input provided by the user
 USAGE:
-filepath:	league <filepath>
-redirection:	league < <filepath>
-pipe:	<input> | league
+filepath:	stock <filepath>
+redirection:	stock < <filepath>
+pipe:	<input> | stock
 ```
 
 4. To run the tests
@@ -58,5 +58,4 @@ After going through the prompt, the following assumptions were made about the sy
 
 ## Improvements
 
-- Implement an async readline mock to test running the app by taking in input files as a command line argument
 - Load test the application by generating larger inputs.

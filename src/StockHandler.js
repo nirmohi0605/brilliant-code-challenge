@@ -30,9 +30,9 @@ export default class StockHandler {
     const [productName, productQuantity] = productInfo;
 
     if (!this.inventory[productName]) {
-      this.inventory[productName] = productQuantity;
+      this.inventory[productName] = Number(productQuantity);
     } else {
-      this.inventory[productName] += productQuantity;
+      this.inventory[productName] += Number(productQuantity);
     }
   }
 
@@ -44,12 +44,20 @@ export default class StockHandler {
       const newCustomer = new Customer(customerName);
       this.customers[customerName] = newCustomer;
     }
-    this.customers[customerName].addNewOrder(productName, orderQuantity);
+    //only process order if inventory permits
+    //@TODO: should we hold on to unfulfilled orders in a DS?
+    if (this.inventory[productName] >= orderQuantity) {
+      this.customers[customerName].addNewOrder(productName, orderQuantity);
+      this.updateInventory(productName, orderQuantity);
+    }
   }
 
+  updateInventory(productName, orderQuantity) {
+    this.inventory[productName] -= orderQuantity;
+  }
   generateOutput() {
-    // console.log("products: ", this.products);
-    // console.log("inventory: ", this.inventory);
+    console.log("products: ", this.products);
+    console.log("inventory: ", this.inventory);
     console.log("customers: ", this.customers);
   }
 }
