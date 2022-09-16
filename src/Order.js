@@ -1,7 +1,7 @@
 export class Order {
-  constructor(customerName, item, quantity) {
-    this.customerName = customerName;
-    this.item = item;
+  constructor(productName, quantity, total) {
+    this.productName = productName;
     this.quantity = quantity;
+    this.total = total;
   }
 }

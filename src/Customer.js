@@ -6,11 +6,21 @@ export default class Customer {
     this.orders = [];
   }
 
-  addNewOrder(productName, orderQuantity) {
-    const newOrder = new Order(productName, orderQuantity);
+  addNewOrder(productName, orderQuantity, orderTotal) {
+    const newOrder = new Order(productName, orderQuantity, orderTotal);
     this.orders.push(newOrder);
   }
-  avgOrderValue() {}
+
+  avgOrderValue() {
+    if (this.orders.length === 0) return "n/a";
+    const totalAmountSpent = this.orders.reduce((acc, curr) => {
+      const updatedTotal = acc + curr.total;
+      return updatedTotal;
+    }, 0);
+
+    //@TODO return string after appending '$', pls create a helper
+    return totalAmountSpent / this.orders.length;
+  }
 
   spending() {}
 }

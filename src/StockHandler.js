@@ -1,11 +1,10 @@
-import Product from "./Product.js";
 import Customer from "./Customer.js";
 
 export default class StockHandler {
   constructor() {
     this.inventory = {};
     this.orders = [];
-    this.products = [];
+    this.products = {};
     this.customers = {};
   }
 
@@ -20,10 +19,9 @@ export default class StockHandler {
 
   registerProduct(productInfo) {
     const [productName, productPrice] = productInfo;
-
-    const newProduct = new Product(productName, productPrice);
-
-    this.products.push(newProduct);
+    //@TODO: add this string processing to helpers pls
+    //@TODO: I'm hating this constant type conversion
+    this.products[productName] = Number(productPrice.slice(1));
   }
 
   checkinProduct(productInfo) {
@@ -47,9 +45,22 @@ export default class StockHandler {
     //only process order if inventory permits
     //@TODO: should we hold on to unfulfilled orders in a DS?
     if (this.inventory[productName] >= orderQuantity) {
-      this.customers[customerName].addNewOrder(productName, orderQuantity);
+      const orderTotal = this.calculateOrderTotal(
+        productName,
+        Number(orderQuantity)
+      );
+      this.customers[customerName].addNewOrder(
+        productName,
+        orderQuantity,
+        orderTotal
+      );
       this.updateInventory(productName, orderQuantity);
     }
+  }
+
+  calculateOrderTotal(productName, orderQuantity) {
+    const price = this.products[productName];
+    return orderQuantity * price;
   }
 
   updateInventory(productName, orderQuantity) {
@@ -59,5 +70,7 @@ export default class StockHandler {
     console.log("products: ", this.products);
     console.log("inventory: ", this.inventory);
     console.log("customers: ", this.customers);
+
+    console.log(this.customers["dan"].avgOrderValue(), "AVG!");
   }
 }
