@@ -35,6 +35,7 @@ export default class StockHandler {
   }
 
   processOrder(orderInfo) {
+    //@TODO: move this to order class?
     //@TODO: should we lowercase the customernames, productnames?
     const [customerName, productName, orderQuantity] = orderInfo;
 
@@ -59,6 +60,7 @@ export default class StockHandler {
   }
 
   calculateOrderTotal(productName, orderQuantity) {
+    //@TODO: move this to order class
     const price = this.products[productName];
     return orderQuantity * price;
   }
@@ -71,6 +73,6 @@ export default class StockHandler {
     console.log("inventory: ", this.inventory);
     console.log("customers: ", this.customers);
 
-    console.log(this.customers["dan"].avgOrderValue(), "AVG!");
+    console.log(this.customers["kate"].spending(), "spending!");
   }
 }

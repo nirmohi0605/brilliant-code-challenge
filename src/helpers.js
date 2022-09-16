@@ -3,4 +3,8 @@ export function getCommand(inputLine) {
   return [commandArr[0], commandArr.slice(1)];
 }
 
+export function convertNumberToDollarString(num) {
+  return `$${num}`;
+}
+
 // export const validInputLineRegex

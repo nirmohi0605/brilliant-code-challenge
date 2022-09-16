@@ -1,4 +1,5 @@
 import { Order } from "./Order.js";
+import { convertNumberToDollarString } from "helpers.js";
 
 export default class Customer {
   constructor(name) {
@@ -22,5 +23,17 @@ export default class Customer {
     return totalAmountSpent / this.orders.length;
   }
 
-  spending() {}
+  spending() {
+    const spendingHash = {};
+
+    this.orders.forEach((order) => {
+      if (spendingHash[order.productName]) {
+        spendingHash[order.productName] += order.total;
+      } else {
+        spendingHash[order.productName] = order.total;
+      }
+    });
+
+    return spendingHash;
+  }
 }

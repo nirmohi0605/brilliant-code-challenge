@@ -13,14 +13,14 @@
 a) via stdin (pipe or redirect) if no input argument is provided:
 
 ```bash
-=> echo "order kate hats 20" | stock  #pipe
-=> stock < ./inputs/sample-input.txt # redirect
+=> echo "order kate hats 20" | stock  # pipe
+=> stock < ./inputs/sample_input.txt # redirect
 ```
 
 b) as file path if the first argument is provided
 
 ```bash
-  => stock ./inputs/sample-input.txt
+  => stock ./inputs/sample_input.txt
 ```
 
 c) If a user tries to run the app without any input, the program prompts correct usage by printing it to the console.
@@ -35,7 +35,7 @@ pipe:	<input> | stock
 
 4. To run the tests
 
-```
+```bash
 => npm test
 ```
 
