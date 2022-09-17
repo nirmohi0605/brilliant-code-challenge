@@ -1,4 +1,7 @@
 import Customer from "./Customer.js";
+import { outputReportFile } from "./constants.js";
+import fs from "fs";
+import { capitalizeFirstLetter } from "./helpers.js";
 
 export default class StockHandler {
   constructor() {
@@ -68,11 +71,34 @@ export default class StockHandler {
   updateInventory(productName, orderQuantity) {
     this.inventory[productName] -= orderQuantity;
   }
-  generateOutput() {
-    console.log("products: ", this.products);
-    console.log("inventory: ", this.inventory);
-    console.log("customers: ", this.customers);
 
-    console.log(this.customers["kate"].spending(), "spending!");
+  generateOutput() {
+    let outputStr = "";
+
+    for (let customer in this.customers) {
+      const curr = this.customers[customer];
+
+      if (curr.hasSpent()) {
+        const customerSpending = curr.calculateSpending();
+        outputStr += `${capitalizeFirstLetter(
+          customer
+        )}: ${customerSpending} | Average Order Value: ${curr.avgOrderValue()}\n`;
+      } else {
+        outputStr += `${capitalizeFirstLetter(customer)}: n/a`;
+      }
+    }
+    return outputStr;
+  }
+
+  generateOutputFile() {
+    let output = fs.createWriteStream(`./reports/${outputReportFile}`, {
+      flags: "a",
+    });
+    const outputLog = this.generateOutput();
+    output.once("open", function (fd) {
+      output.write(outputLog);
+      console.log("done writing to file");
+      output.end();
+    });
   }
 }

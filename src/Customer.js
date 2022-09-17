@@ -1,10 +1,11 @@
 import { Order } from "./Order.js";
-import { convertNumberToDollarString } from "helpers.js";
+import { removeTrailingComma } from "./helpers.js";
 
 export default class Customer {
   constructor(name) {
     this.name = name;
     this.orders = [];
+    this.spendingTally = {};
   }
 
   addNewOrder(productName, orderQuantity, orderTotal) {
@@ -23,17 +24,28 @@ export default class Customer {
     return totalAmountSpent / this.orders.length;
   }
 
-  spending() {
-    const spendingHash = {};
+  hasSpent() {
+    this.calculateSpending();
+    return !Object.keys(this.spendingTally).length == 0; //@TODO: why does the triple equals not work here?
+  }
 
+  getSpending() {
+    let spending = "";
+    for (let item in this.spendingTally) {
+      spending += `${item} - $${this.spendingTally[item]}, `; //@TODO: remove comma from the last element
+    }
+    return removeTrailingComma(spending);
+  }
+
+  calculateSpending() {
     this.orders.forEach((order) => {
-      if (spendingHash[order.productName]) {
-        spendingHash[order.productName] += order.total;
+      if (this.spendingTally[order.productName]) {
+        this.spendingTally[order.productName] += order.total;
       } else {
-        spendingHash[order.productName] = order.total;
+        this.spendingTally[order.productName] = order.total;
       }
     });
 
-    return spendingHash;
+    return this.getSpending();
   }
 }

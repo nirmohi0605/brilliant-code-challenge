@@ -48,6 +48,7 @@ After going through the prompt, the following assumptions were made about the sy
 - Each product and its price is registered only once into the system using the `register` command
 - All items and customers have distinct names
 - the input format stays consistent throughout the program
+- any input lines starting with invalid commands are ignored
 
 ### Logic/ Data Flow
 

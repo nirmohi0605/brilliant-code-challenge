@@ -28,6 +28,8 @@ export default class InputParser {
 
   isInputValid(inputLine) {
     // return validInputLineRegex.test(inputLine);
+
+    //@TODO: do we write separate regexes for the two input formats?
     return true;
   }
 }
