@@ -1,5 +1,5 @@
 import { Order } from "./Order.js";
-import { removeTrailingComma } from "./helpers.js";
+import { removeTrailingComma, convertNumberToDollarString } from "./helpers.js";
 
 export default class Customer {
   constructor(name) {
@@ -21,18 +21,17 @@ export default class Customer {
     }, 0);
 
     //@TODO return string after appending '$', pls create a helper
-    return totalAmountSpent / this.orders.length;
+    return convertNumberToDollarString(totalAmountSpent / this.orders.length);
   }
 
   hasSpent() {
-    this.calculateSpending();
     return !Object.keys(this.spendingTally).length == 0; //@TODO: why does the triple equals not work here?
   }
 
   getSpending() {
     let spending = "";
     for (let item in this.spendingTally) {
-      spending += `${item} - $${this.spendingTally[item]}, `; //@TODO: remove comma from the last element
+      spending += `${item} - $${this.spendingTally[item]}, `;
     }
     return removeTrailingComma(spending);
   }

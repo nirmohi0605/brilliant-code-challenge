@@ -77,9 +77,9 @@ export default class StockHandler {
 
     for (let customer in this.customers) {
       const curr = this.customers[customer];
+      const customerSpending = curr.calculateSpending();
 
       if (curr.hasSpent()) {
-        const customerSpending = curr.calculateSpending();
         outputStr += `${capitalizeFirstLetter(
           customer
         )}: ${customerSpending} | Average Order Value: ${curr.avgOrderValue()}\n`;

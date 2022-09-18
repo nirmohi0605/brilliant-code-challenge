@@ -27,7 +27,6 @@ export async function stock() {
       .on("close", () => {
         //spits up output file
         stockHandler.generateOutputFile();
-        console.log("data fini");
       });
   } catch (e) {
     console.error(e);
