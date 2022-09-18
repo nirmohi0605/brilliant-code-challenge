@@ -1,7 +1,7 @@
 import InputParser from "./InputParser.js";
 import StockHandler from "./StockHandler.js";
 
-export async function stock() {
+export async function stock(outputFilePath = "") {
   let readInterface;
   const inputParser = new InputParser();
   try {
@@ -25,8 +25,7 @@ export async function stock() {
           stockHandler.executeCommand(command, commandPayload);
       })
       .on("close", () => {
-        //spits up output file
-        stockHandler.generateOutputFile();
+        stockHandler.generateOutputFile(outputFilePath);
       });
   } catch (e) {
     console.error(e);

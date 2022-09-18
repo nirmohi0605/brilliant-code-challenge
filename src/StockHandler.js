@@ -90,14 +90,14 @@ export default class StockHandler {
     return outputStr;
   }
 
-  generateOutputFile() {
-    let output = fs.createWriteStream(`./reports/${outputReportFile}`, {
+  generateOutputFile(reportFilePath) {
+    const outputFilePath = reportFilePath || `./reports/${outputReportFile}`;
+    let output = fs.createWriteStream(outputFilePath, {
       flags: "a",
     });
     const outputLog = this.generateOutput();
     output.once("open", function (fd) {
       output.write(outputLog);
-      console.log("done writing to file");
       output.end();
     });
   }
