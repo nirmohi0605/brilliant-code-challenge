@@ -1,0 +1,10 @@
+register hats $20.50
+register socks $3.45
+wear socks $900
+register keychain $5.57
+checkin hats 100
+eat all the hats 300
+order kate hats 20
+checkin socks 30
+order dan socks 35
+order kate socks 10

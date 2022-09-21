@@ -1,7 +1,7 @@
 import readline from "readline";
 import fs from "fs";
-import { getCommand } from "./helpers.js";
 
+import { getCommand } from "./helpers.js";
 export default class InputParser {
   async getReadInterface(filepath = "") {
     const readInput =
@@ -20,16 +20,14 @@ export default class InputParser {
   }
 
   parseCommandFromInput(inputLine) {
-    if (this.isInputValid(inputLine)) {
-      return getCommand(inputLine);
-    }
+    let validCommands = ["register", "order", "checkin"];
+    const command = getCommand(inputLine);
+    if (validCommands.includes(command[0])) return command;
     return null;
   }
 
-  isInputValid(inputLine) {
-    // return validInputLineRegex.test(inputLine);
-
-    //@TODO: do we write separate regexes for the two input formats?
-    return true;
-  }
+  // isInputValid(inputLine) {
+  //   console.log(inputLine, validCommandRegex.test(testRegex));
+  //   return true;
+  // }
 }

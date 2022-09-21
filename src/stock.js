@@ -19,6 +19,11 @@ export async function stock(outputFilePath = "") {
 
     readInterface
       .on("line", (line) => {
+        const parsedCommand = inputParser.parseCommandFromInput(line);
+        if (!parsedCommand) {
+          console.log("warning: Invalid input detected");
+          return;
+        }
         const [command, commandPayload] =
           inputParser.parseCommandFromInput(line);
         if (command && commandPayload)

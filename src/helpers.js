@@ -14,4 +14,3 @@ export function capitalizeFirstLetter(word) {
 export function removeTrailingComma(str) {
   return str.replace(/,(\s+)?$/, "");
 }
-// export const validInputLineRegex

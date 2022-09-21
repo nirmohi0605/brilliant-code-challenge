@@ -1,0 +1,8 @@
+wear hats $20.50
+eat socks $3.45
+lose keychain $5.57
+fry hats 100
+destroy kate hats 20
+throw socks 30
+lose dan socks 35
+burn kate socks 10
