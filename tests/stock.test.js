@@ -18,6 +18,7 @@ describe("Process inventory transactions", () => {
   });
 
   afterAll(async () => {
+    await wait();
     outputFiles.forEach((file) =>
       fs.unlinkSync(file, (err) => {
         if (err) {
@@ -29,7 +30,7 @@ describe("Process inventory transactions", () => {
 
   it("should process given sample input from stdin and print the correct stock", async () => {
     const stdin = mockStdin();
-    let output = `tests/test-outputs/myreport.txt`;
+    let output = `tests/test-outputs/report.txt`;
     outputFiles.push(output);
     stock(output);
     await wait();
@@ -37,10 +38,10 @@ describe("Process inventory transactions", () => {
     stdin.send(null);
 
     const genOutput = fs.readFileSync(
-      "tests/expected-outputs/myreport.txt",
+      "tests/expected-outputs/expected_report.txt",
       "utf-8"
     );
-    await wait();
+    await wait(5);
     const reportContent = fs.readFileSync(output, "utf-8");
 
     assert.equal(genOutput, reportContent);
@@ -48,7 +49,7 @@ describe("Process inventory transactions", () => {
 
   it("should process a larger sample input from stdin and print the correct stock values", async () => {
     const stdin = mockStdin();
-    let output = `tests/test-outputs/myreport-larger.txt`;
+    let output = `tests/test-outputs/report_larger.txt`;
     outputFiles.push(output);
     stock(output);
     await wait();
@@ -56,11 +57,11 @@ describe("Process inventory transactions", () => {
     stdin.send(null);
 
     const expectedOutput = fs.readFileSync(
-      "tests/expected-outputs/my-report-larger.txt",
+      "tests/expected-outputs/expected_report_larger.txt",
       "utf-8"
     );
 
-    await wait();
+    await wait(5);
     const generatedOutput = fs.readFileSync(output, "utf-8");
 
     assert.equal(expectedOutput, generatedOutput);
@@ -68,7 +69,7 @@ describe("Process inventory transactions", () => {
 
   it("should process an input with all invalid commands", async () => {
     const stdin = mockStdin();
-    let output = `tests/test-outputs/myreport-all-invalid.txt`;
+    let output = `tests/test-outputs/report_all_invalid.txt`;
     outputFiles.push(output);
     stock(output);
     await wait();
@@ -77,11 +78,11 @@ describe("Process inventory transactions", () => {
 
     expect(console.log).toBeCalledTimes(8);
     const expectedOutput = fs.readFileSync(
-      "tests/expected-outputs/my-report-all-invalid.txt",
+      "tests/expected-outputs/expected_report_all_invalid.txt",
       "utf-8"
     );
 
-    await wait();
+    await wait(5);
     const generatedOutput = fs.readFileSync(output, "utf-8");
 
     assert.equal(expectedOutput, generatedOutput);
@@ -89,7 +90,7 @@ describe("Process inventory transactions", () => {
 
   it("should process given sample input with some invalid lines from stdin and print the correct stock", async () => {
     const stdin = mockStdin();
-    let output = `tests/test-outputs/myreport-some-invalid.txt`;
+    let output = `tests/test-outputs/report_some_invalid.txt`;
     outputFiles.push(output);
     stock(output);
     await wait();
@@ -97,11 +98,11 @@ describe("Process inventory transactions", () => {
     stdin.send(null);
 
     const expectedOutput = fs.readFileSync(
-      "tests/expected-outputs/myreport.txt",
+      "tests/expected-outputs/expected_report.txt",
       "utf-8"
     );
 
-    await wait();
+    await wait(5);
     const generatedOutput = fs.readFileSync(output, "utf-8");
 
     assert.equal(expectedOutput, generatedOutput);
