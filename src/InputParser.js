@@ -1,6 +1,5 @@
 import readline from "readline";
 import fs from "fs";
-
 import { getCommand } from "./helpers.js";
 export default class InputParser {
   async getReadInterface(filepath = "") {

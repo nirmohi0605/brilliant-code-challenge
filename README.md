@@ -65,3 +65,4 @@ After going through the prompt, the following assumptions were made about the sy
 ## Improvements
 
 - Load test the application by generating larger inputs
+- Process product pricing in cents, to mimic real world processing
