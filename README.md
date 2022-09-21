@@ -52,11 +52,16 @@ After going through the prompt, the following assumptions were made about the sy
 
 ### Logic/ Data Flow
 
+- The `InputParser` class processes the provided input line by line asyncronously using Node's `readline` module and process it if the command is valid. Invalid input lines are skipped.
+- Each command is then processed by the `StockHandler` class.
+- The `StockHandler` class keeps a tally of the orders (using the class `Order`), inventory, products (class `Product`) and customers and also handles the output report generation when the input stream ends
+- The `Customer` class handles calculation of avg order value and spending calculations per customer
+
 ### Testing
 
 - The tests test the application by mimicking how a user would use the CLI. Text files for the test cases are in the `/inputs` folder - and fixtures were created for each of these cases by reading the file in and converting the contents into a string which is consumed by the tests via stdin.
-- The library `mock-stdin` is being used for this purpose and the output is being tested by creating a mock implementation of `console.log` using jest spies.
+- The library `mock-stdin` is being used for this purpose and the log output to the console in case of an invalid command is being tested by creating a mock implementation of `console.log` using jest spies.
 
 ## Improvements
 
-- Load test the application by generating larger inputs.
+- Load test the application by generating larger inputs

@@ -25,9 +25,4 @@ export default class InputParser {
     if (validCommands.includes(command[0])) return command;
     return null;
   }
-
-  // isInputValid(inputLine) {
-  //   console.log(inputLine, validCommandRegex.test(testRegex));
-  //   return true;
-  // }
 }

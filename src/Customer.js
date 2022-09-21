@@ -20,12 +20,11 @@ export default class Customer {
       return updatedTotal;
     }, 0);
 
-    //@TODO return string after appending '$', pls create a helper
     return convertNumberToDollarString(totalAmountSpent / this.orders.length);
   }
 
   hasSpent() {
-    return !Object.keys(this.spendingTally).length == 0; //@TODO: why does the triple equals not work here?
+    return !Object.keys(this.spendingTally).length == 0;
   }
 
   getSpending() {

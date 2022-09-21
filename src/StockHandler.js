@@ -22,8 +22,6 @@ export default class StockHandler {
 
   registerProduct(productInfo) {
     const [productName, productPrice] = productInfo;
-    //@TODO: add this string processing to helpers pls
-    //@TODO: I'm hating this constant type conversion
     this.products[productName] = Number(productPrice.slice(1));
   }
 
@@ -38,8 +36,6 @@ export default class StockHandler {
   }
 
   processOrder(orderInfo) {
-    //@TODO: move this to order class?
-    //@TODO: should we lowercase the customernames, productnames?
     const [customerName, productName, orderQuantity] = orderInfo;
 
     if (!this.customers[customerName]) {
@@ -47,7 +43,6 @@ export default class StockHandler {
       this.customers[customerName] = newCustomer;
     }
     //only process order if inventory permits
-    //@TODO: should we hold on to unfulfilled orders in a DS?
     if (this.inventory[productName] >= orderQuantity) {
       const orderTotal = this.calculateOrderTotal(
         productName,
@@ -63,7 +58,6 @@ export default class StockHandler {
   }
 
   calculateOrderTotal(productName, orderQuantity) {
-    //@TODO: move this to order class
     const price = this.products[productName];
     return orderQuantity * price;
   }
