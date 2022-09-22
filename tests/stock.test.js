@@ -17,6 +17,10 @@ describe("Process inventory transactions", () => {
     jest.spyOn(console, "log").mockImplementationOnce(() => {});
   });
 
+  afterEach(() => {
+    console.log.mockClear();
+  });
+
   afterAll(async () => {
     await wait();
     outputFiles.forEach((file) =>
@@ -96,6 +100,8 @@ describe("Process inventory transactions", () => {
     await wait();
     stdin.send(someInvalidCommands);
     stdin.send(null);
+
+    expect(console.log).toBeCalledTimes(2);
 
     const expectedOutput = fs.readFileSync(
       "tests/expected-outputs/expected_report.txt",

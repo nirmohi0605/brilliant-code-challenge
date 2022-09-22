@@ -54,7 +54,7 @@ After going through the prompt, the following assumptions were made about the sy
 
 - The `InputParser` class processes the provided input line by line asyncronously using Node's `readline` module and process it if the command is valid. Invalid input lines are skipped.
 - Each command is then processed by the `StockHandler` class.
-- The `StockHandler` class keeps a tally of the orders (using the class `Order`), inventory, products (class `Product`) and customers and also handles the output report generation when the input stream ends
+- The `StockHandler` class keeps a tally of the orders (using the class `Order`), inventory, products (class `Product`) and customers and also handles the output report generation when the input stream ends. The reports are stores in the `/reports` folder.
 - The `Customer` class handles calculation of avg order value and spending calculations per customer
 
 ### Testing
